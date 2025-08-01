@@ -1,27 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
-
-    // === THEME TOGGLE FUNCTIONALITY ===
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    body.setAttribute('data-theme', currentTheme);
-
-    function updateThemeIcon(theme) {
-        const icon = themeToggle?.querySelector('i');
-        if (!icon) return;
-        icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-    }
-
-    updateThemeIcon(currentTheme);
-
-    themeToggle?.addEventListener('click', () => {
-        const current = body.getAttribute('data-theme');
-        const newTheme = current === 'dark' ? 'light' : 'dark';
-        body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-        updateNavbarBackground(); // Update navbar immediately
-    });
+    body.setAttribute('data-theme', 'dark'); // Always dark mode
 
     // === MOBILE NAVIGATION TOGGLE ===
     const hamburger = document.querySelector('.hamburger');
@@ -228,18 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     function updateNavbarBackground() {
         if (!navbar) return;
-        if (window.scrollY > 50) {
-            navbar.style.background = body.getAttribute('data-theme') === 'dark'
-                ? 'rgba(17, 24, 39, 0.98)'
-                : 'rgba(255, 255, 255, 0.98)';
-        } else {
-            navbar.style.background = body.getAttribute('data-theme') === 'dark'
-                ? 'rgba(17, 24, 39, 0.95)'
-                : 'rgba(255, 255, 255, 0.95)';
-        }
+        navbar.style.background = window.scrollY > 50
+            ? 'rgba(17, 24, 39, 0.98)'   // Dark mode color
+            : 'rgba(17, 24, 39, 0.95)';
     }
     window.addEventListener('scroll', updateNavbarBackground);
-    updateNavbarBackground(); // Initial call
+    updateNavbarBackground();
 
     // === CERTIFICATE BADGE CLICK HANDLER ===
     document.querySelectorAll('.cert-verify').forEach(link => {
