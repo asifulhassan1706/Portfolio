@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
-    body.setAttribute('data-theme', 'dark'); // Always dark mode
+    body.setAttribute('data-theme', 'dark'); // Always dark
 
     // === MOBILE NAVIGATION TOGGLE ===
     const hamburger = document.querySelector('.hamburger');
@@ -56,17 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
     contactForm?.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const message = formData.get('message');
-        
-        if (!name || !email || !message) {
-            alert('Please fill in all fields.');
-            return;
-        }
-        
         alert('Thank you for your message! I will get back to you soon.');
         contactForm.reset();
     });
@@ -235,7 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         type();
     }
-
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
         const originalText = heroTitle.textContent;
